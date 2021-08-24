@@ -16,7 +16,29 @@ The game can be played from the command line by running `main.py`.
 Create an instance of class Game `game = Game()`  
 This will generate a new game with default configuration.
 
-Create a custom game by including arguments. `game = Game(pockets_per_side = 10, starting_stones_per_pocket = 5)` will begin a game with 10 holes on each side each beginning with 5 stones.
+Create a custom game by including arguments:
+
+*board*  
+*Type*: `list`  
+*Description*: Specifies a custom board position to start a game from.  
+*Default*: `None`
+
+*whoseTurn*  
+*Type*: `int`  
+*Description*: Indicates which player is to play next, `1` or `2`.  
+*Default*: `1`
+
+*pockets_per_side*  
+*Type*: `int`  
+*Description*: Specifies the number of holes on each side of the board.  
+*Default*: `6`
+
+*starting_stones_per_pocket*  
+*Type*: `int`  
+*Description*: Specifies the starting number of stones in each hole.  
+*Default*: `4`
+
+`game = Game(pockets_per_side = 10, starting_stones_per_pocket = 5)` will begin a game with 10 holes on each side each beginning with 5 stones.
 
 Additionally, a game can be started from a custom position by specifying a board to start from. Boards are lists of integers specifying the number of stones. The indices correlate with pockets starting at Player 1's first pocket and moving counter-clockwise to Player 2's scoring pocket. For example,
 ```python
