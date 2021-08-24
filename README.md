@@ -2,7 +2,7 @@
 
 Python3 version of the board game [Mancala](https://harriscenter.org/wp-content/uploads/2020/03/mancala_rules.pdf). This implementation should work well for building and testing artificial intelligence models.
 
-Traditionally, Mancala is played with 14 holes, each player having 6 in play and 1 hole for captured stones. Each hole in play begins with 4 stones. Here, the number of holes and the starting number of stones can both be customized, as well as starting positions and scores - hence **Mancala+**. This allowed for more varied gameplay and an enhanced environment for AI modules.
+Traditionally, Mancala is played with 14 holes, each player having 6 in play and 1 hole for captured stones. Each hole in play begins with 4 stones. Here, the number of holes and the starting number of stones can both be customized, as well as starting positions and scores - hence **Mancala+**. This allows for more varied gameplay and an enhanced environment for AI modules.
 
 The game should be able to easily connect to any front-end graphical interface by utilizing the available methods.
 
@@ -40,7 +40,7 @@ Create a custom game by including arguments:
 
 `game = Game(pockets_per_side = 10, starting_stones_per_pocket = 5)` will begin a game with 10 holes on each side each beginning with 5 stones.
 
-Additionally, a game can be started from a custom position by specifying a board to start from. Boards are lists of integers specifying the number of stones. The indices correlate with pockets starting at Player 1's first pocket and moving counter-clockwise to Player 2's scoring pocket. For example,
+A game can also be started from a custom position by specifying a board to start from. Boards are lists of integers specifying the number of stones. The indices correlate with pockets starting at Player 1's first pocket and moving counter-clockwise to Player 2's scoring pocket. For example,
 ```python
 board = [5, 5, 5, 5, 5, 0, 6, 6, 6, 6, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0]
 game = Game(board = board, whoseTurn = 2)
