@@ -1,6 +1,6 @@
 class Game:
 
-    def __init__(self, board=None, whoseTurn=None, starting_stones_per_pocket: int=4, pockets_per_side: int=6):
+    def __init__(self, board=None, whoseTurn: int=1, starting_stones_per_pocket: int=4, pockets_per_side: int=6):
         self._whoseTurn = whoseTurn if whoseTurn == 2 else 1
         # Create a board with (by default) 14 pockets. Starts at first pocket for player one and moves counter-clockwise
         # Visualization:
@@ -8,16 +8,30 @@ class Game:
         # 14                   07
         #    01 02 03 04 05 06
 
+        # Validate inputs if given
+        # Board elements must be integers
+        if board and not all(isinstance(pocket, int) for pocket in board):
+            raise ValueError("Custom board must be a list of integers.")
+        # Board should have at least 4 total pockets
+        if board and len(board) < 4:
+            raise ValueError("Custom board must be at least 4 elements.")
+        # Similarly, each side must have at least 1 pocket
+        if pockets_per_side < 1:
+            raise ValueError("Custom board must have at least one pocket per side.")
+        # Prevent the existence negative stones
+        if (starting_stones_per_pocket < 0) or (pocket < 0 for pocket in board):
+            raise ValueError("Cannot have negative stones in a pocket.")
+
         # Start from a pre-setup board if given
         if board:
             self._board = board
             self._POCKETS_PER_SIDE = (len(board) - 2) // 2
+            self._STONES_PER_POCKET = sum(board) // (len(board) - 2)
         # Otherwise generate a default board
         else:
             self._board = Game.generateBoard(starting_stones_per_pocket, pockets_per_side)
             self._POCKETS_PER_SIDE = pockets_per_side
-
-        self._STONES_PER_POCKET = starting_stones_per_pocket
+            self._STONES_PER_POCKET = starting_stones_per_pocket
 
         self._history = [self.getBoard()]
 
@@ -39,7 +53,7 @@ class Game:
     @staticmethod
     def render(board: list) -> str:
         # Add leading 0 for spacing purposes
-        # Note: Formatting will be misaligned if |stones| > 99 in a hole
+        # Note: Formatting will be misaligned if >99 stones in a hole
         board = [f"{b:02d}" for b in board]
         # Identify parts of the board
         p1side = board[0:(len(board)//2)-1]

@@ -21,7 +21,7 @@ Create a custom game by including arguments. `game = Game(pockets_per_side = 10,
 Additionally, a game can be started from a custom position by specifying a board to start from. Boards are lists of integers specifying the number of stones. The indices correlate with pockets starting at Player 1's first pocket and moving counter-clockwise to Player 2's scoring pocket. For example,
 ```python
 board = [5, 5, 5, 5, 5, 0, 6, 6, 6, 6, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0]
-game = Game(board = board, starting_stones_per_pocket = 5, whoseTurn = 2)
+game = Game(board = board, whoseTurn = 2)
 ```
 will generate a game in progress that looks like this (if Player 1 is graphically on the bottom),
 ```
