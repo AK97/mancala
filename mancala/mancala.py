@@ -19,7 +19,7 @@ class Game:
         if pockets_per_side < 1:
             raise ValueError("Custom board must have at least one pocket per side.")
         # Prevent the existence negative stones
-        if (starting_stones_per_pocket < 0) or (pocket < 0 for pocket in board):
+        if (starting_stones_per_pocket < 0) or (board and (pocket < 0 for pocket in board)):
             raise ValueError("Cannot have negative stones in a pocket.")
 
         # Start from a pre-setup board if given
@@ -27,6 +27,7 @@ class Game:
             self._board = board
             self._POCKETS_PER_SIDE = (len(board) - 2) // 2
             self._STONES_PER_POCKET = sum(board) // (len(board) - 2)
+
         # Otherwise generate a default board
         else:
             self._board = Game.generateBoard(starting_stones_per_pocket, pockets_per_side)
