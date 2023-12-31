@@ -47,6 +47,8 @@ game = Game(board = board, whoseTurn = 2)
 ```
 will generate a game in progress that looks like this (if Player 1 is graphically on the bottom),
 ```
+>> Game.render(game)
+
   5 5 5 5 5 5 5 5 5 5
 0                     1
   5 5 5 5 5 0 6 6 6 6

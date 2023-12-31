@@ -52,7 +52,8 @@ class Game:
         return half_board * 2
 
     @staticmethod
-    def render(board: list) -> str:
+    def render(board: list) -> None:
+        '''Prints the board visually. The bottom side belongs to the player whose turn it is.'''
         # Add leading 0 for spacing purposes
         # Note: Formatting will be misaligned if >99 stones in a hole
         board = [f"{b:02d}" for b in board]
@@ -90,6 +91,11 @@ class Game:
         return self._board
 
     def whoseTurn(self):
+        '''
+        Returns 1 if it's Player 1's turn.\n
+        Returns 2 if it's Player 2's turn.\n
+        Returns 0 if the game is already over.
+        '''
         if self.isGameOver():
             return 0
         return self._whoseTurn
@@ -100,6 +106,7 @@ class Game:
     ## Game Logic
 
     def isGameOver(self) -> bool:
+        '''Returns True if the game is over.'''
         score = Game.getScore(self.getBoard())
         winningScore = self._STONES_PER_POCKET * self._POCKETS_PER_SIDE
         # Game ends if one player has more than half the total possible points or if either side is cleared
@@ -109,13 +116,19 @@ class Game:
             return False
 
     def winner(self) -> int:
+        '''
+        Returns 1 if Player 1 won\n
+        Returns 2 if Player 2 won.\n
+        Returns 3 if the game was a tie.\n
+        Returns 0 if the game is not over.
+        '''
         if self.isGameOver():
             score = Game.getScore(self.getBoard())
             if len(set(score)) == 1:
                 return 3 # Tie
             return score.index(max(score)) + 1
         else:
-            return None
+            return 0
 
     def _addStones(self, pocket:int, num_stones:int=1):
         # Pocket is the 0-indexed pocket of the board list
