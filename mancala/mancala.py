@@ -19,7 +19,7 @@ class Game:
         if pockets_per_side < 1:
             raise ValueError("Custom board must have at least one pocket per side.")
         # Prevent the existence negative stones
-        if (starting_stones_per_pocket < 0) or (board and (pocket < 0 for pocket in board)):
+        if (starting_stones_per_pocket < 0) or (board and (min(board) < 0)):
             raise ValueError("Cannot have negative stones in a pocket.")
 
         # Start from a pre-setup board if given
@@ -180,7 +180,7 @@ class Game:
         # If it's player 2's turn, moves 1 to 6 correlate with indices 7 to 12 (if 6 pockets)
         playerDependentOffset = (self.whoseTurn() - 1) * (self._POCKETS_PER_SIDE + 1) - 1
         move += playerDependentOffset
-        own_side = [pocket+playerDependentOffset for pocket in range(0, self._POCKETS_PER_SIDE)] # Which pockets belong to you. Used later for identifying captures.
+        own_side = [pocket+playerDependentOffset for pocket in range(1, self._POCKETS_PER_SIDE + 1)] # Which pockets belong to you. Used later for identifying captures.
 
         # Validity check - chosen pocket must not be empty
         if self.getBoard()[move] == 0:
